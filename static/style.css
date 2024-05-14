@@ -1,0 +1,9 @@
+#suggestions div:hover {
+    background-color: #f0f0f0; /* Light grey background on hover */
+}
+
+#reminder {
+    color: #d9534f; /* Use bootstrap 'danger' color for emphasis */
+    font-weight: bold;
+    margin-top: 5px; /* Ensure there's a small gap from the button */
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Internet Usage Visualization</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Times New Roman', serif; /* Changed font to Times New Roman */
+        }
+        #container {
+            text-align: center;
+        }
+        svg {
+            display: block;
+            margin: auto;
+        }
+        h2 {
+            font-size: 20px; /* Reduced font size for the heading */
+        }
+        input[type="text"], button {
+            font-size: 16px; /* Slightly reduced font size */
+            padding: 4px; /* Adjusted padding for balance */
+        }
+        #suggestions {
+            position: absolute;
+            background: white;
+            border: 1px solid #ccc;
+        }
+        #reminder {
+            color: red;
+            display: none;
+            margin-top: 10px;
+        }
+    </style>    
+</head>
+<body>
+    <div id="container">
+        <h2>Internet Usage by Country (2000-2020)</h2>
+        <input type="text" id="countryInput" placeholder="Enter a country name" oninput="filterCountries()" size="30">
+        <div id="suggestions" style="position: absolute; background: white; border: 1px solid #ccc;"></div>
+        <button onclick="updateChart()">Show Chart</button>
+        <div id="reminder" style="color: red; display: none; margin-top: 5px;">Please click 'Show Chart' to view the data.</div>
+        <div id="chart"></div>
+    </div>
+    <script src="chart.js"></script>
+</body>
+</html>
