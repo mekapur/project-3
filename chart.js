@@ -198,7 +198,7 @@ const data = {
             const years = data[country][0];
             const percentages = data[country][1];
     
-            const margin = {top: 75, right: 30, bottom: 75, left: 80}; // Adjusted left margin for larger y-axis labels
+            const margin = {top: 75, right: 30, bottom: 75, left: 80}; 
             const width = 900 - margin.left - margin.right;
             const height = 700 - margin.top - margin.bottom;
     
@@ -219,7 +219,7 @@ const data = {
                     .tickFormat(d3.format("d")))
                 .selectAll("text")
                     .style("text-anchor", "middle")
-                    .style("font-size", "14px"); // Increased font size for x-axis labels
+                    .style("font-size", "14px"); 
     
             const y = d3.scaleLinear()
                 .domain([0, 100])
@@ -230,9 +230,9 @@ const data = {
                 .selectAll("text")
                 .style("font-size", "14px");
                 
-            // Major grid lines at every 10%
+            
             svg.selectAll("majorGrid")
-                .data(y.ticks(10)) // Generate 10 ticks
+                .data(y.ticks(10)) 
                 .enter()
                 .append("line")
                 .attr("x1", 0)
@@ -242,9 +242,9 @@ const data = {
                 .attr("stroke", "gray")
                 .attr("stroke-width", 0.5);
                 
-            // Minor grid lines at every 5% (excluding those that coincide with major grid lines)
+            
             svg.selectAll("minorGrid")
-                .data(y.ticks(20).filter(tick => tick % 10 !== 0)) // Generate 20 ticks but filter out the major grid lines
+                .data(y.ticks(20).filter(tick => tick % 10 !== 0)) 
                 .enter()
                 .append("line")
                 .attr("x1", 0)
@@ -253,12 +253,12 @@ const data = {
                 .attr("y2", d => y(d))
                 .attr("stroke", "gray")
                 .attr("stroke-width", 0.5)
-                .style("stroke-dasharray", ("3, 3")); // Dotted style                
+                .style("stroke-dasharray", ("3, 3"));          
     
             svg.append("text")
                 .attr("text-anchor", "middle")
                 .attr("x", width / 2)
-                .attr("y", height + 50)  // Adjusted y position of x-axis title
+                .attr("y", height + 50)  
                 .text("Years (2000-2020)")
                 .style("font-size", "16px");
     
@@ -287,30 +287,30 @@ const data = {
                 .attr("y", d => y(d.value))
                 .attr("width", x.bandwidth())
                 .attr("height", d => height - y(d.value))
-                .attr("fill", d => "steelblue") // Use red for 2020, otherwise blue
+                .attr("fill", d => "steelblue") 
                 .on("mouseover", function(event, d) {
-                    // Change fill color on hover
+                   
                     d3.select(this).transition()
                         .duration(100)
                         .attr("fill", d.year === 2020 ? "maroon" : "darkblue");
             
-                    // Append text for all bars
+                   
                     svg.append("text")
-                        .attr("class", "val") // Add class for easy removal
+                        .attr("class", "val") 
                         .attr("x", x(d.year) + x.bandwidth()/2)
                         .attr("y", y(d.value) - 5)
                         .attr("text-anchor", "middle")
                         .text(d.value + "%");
             
-                    // Additional tooltip for 2020
+                   
                     if (d.year === 2020) {
                         const covidText = "COVID-19";
                         const letters = covidText.split('');
                         letters.forEach((letter, index) => {
                             svg.append("text")
-                                .attr("class", "tooltip-covid") // Specific class for COVID-19 tooltip
+                                .attr("class", "tooltip-covid") 
                                 .attr("x", x(d.year) + x.bandwidth()/2)
-                                .attr("y", y(d.value-10) + (15 * index) - 20) // Space out letters vertically
+                                .attr("y", y(d.value-10) + (15 * index) - 20) 
                                 .attr("text-anchor", "middle")
                                 .style("fill", "white")
                                 .style("font-size", "15px")
@@ -323,7 +323,7 @@ const data = {
                         .duration(100)
                         .attr("fill", "steelblue");
             
-                    // Remove the text and tooltip on mouseout
+                    
                     d3.selectAll(".val").remove();
                     d3.selectAll(".tooltip-covid").remove();
                 });
@@ -343,11 +343,11 @@ const data = {
         }
     }       
     
-    // Modified to only fill the textbox and not automatically update the chart
+   
     function fillInputAndWait(countryName) {
         document.getElementById('countryInput').value = countryName;
         document.getElementById('suggestions').style.display = 'none';
-        // Show the reminder message
+       
         document.getElementById('reminder').style.display = 'block';
     }    
     
@@ -356,8 +356,8 @@ const data = {
         const filter = input.value.toUpperCase();
         const suggestions = document.getElementById('suggestions');
         suggestions.innerHTML = '';
-        suggestions.style.left = input.getBoundingClientRect().left + 'px'; // Position the dropdown directly below the input
-        suggestions.style.top = (input.getBoundingClientRect().top + input.getBoundingClientRect().height) + 'px'; // Ensure it's right below the input
+        suggestions.style.left = input.getBoundingClientRect().left + 'px';
+        suggestions.style.top = (input.getBoundingClientRect().top + input.getBoundingClientRect().height) + 'px'; 
     
         if (!filter) {
             suggestions.style.display = 'none';
@@ -372,8 +372,8 @@ const data = {
             div.innerHTML = country;
             div.style.padding = '10px';
             div.style.cursor = 'pointer';
-            div.onmouseover = function() { this.style.backgroundColor = '#f0f0f0'; }; // Change background on hover
-            div.onmouseout = function() { this.style.backgroundColor = '#fff'; }; // Revert on mouse out
+            div.onmouseover = function() { this.style.backgroundColor = '#f0f0f0'; }; 
+            div.onmouseout = function() { this.style.backgroundColor = '#fff'; }; 
             div.onclick = function() {
                 fillInputAndWait(country);
             };
