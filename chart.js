@@ -310,7 +310,7 @@ const data = {
                             svg.append("text")
                                 .attr("class", "tooltip-covid") 
                                 .attr("x", x(d.year) + x.bandwidth()/2)
-                                .attr("y", y(d.value-10) + (15 * index) - 20) 
+                                .attr("y", y(d.value-10) + (15 * index) - 35) 
                                 .attr("text-anchor", "middle")
                                 .style("fill", "white")
                                 .style("font-size", "15px")
@@ -365,7 +365,7 @@ const data = {
         }
     
         const keys = Object.keys(data);
-        const filteredKeys = keys.filter(key => key.toUpperCase().startsWith(filter));
+        const filteredKeys = keys.filter(key => key.toUpperCase().includes(filter));
     
         filteredKeys.forEach(function(country) {
             const div = document.createElement('div');
